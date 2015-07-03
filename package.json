@@ -1,6 +1,10 @@
 {
   "name": "ecopulse",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ecopulse/ecopulse"
+  },
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
     "grunt": "^0.4.5",
