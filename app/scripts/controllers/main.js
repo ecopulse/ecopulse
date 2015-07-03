@@ -17,9 +17,10 @@ angular.module('ecopulse')
 
     $scope.getData = function () {
       $scope.highchartsNG.loading = true;
-      Query.process($scope.dataset,$scope.prop_type,$scope.measure,$scope.start_date).then(function(result) {
+
+      Query.process($scope.dataset, $scope.prop_type, $scope.measure, $scope.start_date).then(function(result) {
         $scope.highchartsNG.loading = false;
-        $scope.updateChart(Transform.convert(result.data));
+        $scope.updateChart(Transform.convert('stat.ABS', result.data));
       });
     };
 
