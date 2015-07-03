@@ -1,0 +1,22 @@
+<div ng-app="ecopulse">
+  <div ng-controller="MainCtrl">
+      Dataset:
+      <input ng-model="dataset" disabled>
+      Property type:
+      <select ng-model="prop_type">
+        <option value="1">Attached dwellings</option>
+        <option value="2">Established houses</option>
+        <option value="3">Residential property</option>
+      </select>
+      Measure:
+      <select ng-model="measure">
+        <option value="1">Index number</option>
+        <option value="2">% change from previous quarter</option>
+        <option value="3">% change from same quarter of previous year</option>
+      </select>
+      <button ng-click="getData()">Get data</button>
+      <button ng-click="clearChart()">Clear chart</button>
+      <highchart id="chart1" config="highchartsNG"></highchart>
+  </div>
+</div>
+
