@@ -8,13 +8,11 @@
  * Controller of ecopulse
  */
 angular.module('ecopulse')
-  .controller('MainCtrl', function ($scope, $http, Query, Transform) {
+  .controller('MainCtrl', function ($scope, $http, Query, Datasets, Transform) {
 
-    $scope.dataset = 'RES_PROP_INDEX';
+    $scope.availableDatasets = ['CPI','UE'];
     $scope.start_date = '2003';
-    var prop_type_strings = ["","Attached dwellings","Established houses","Residential property"];
-    var measure_strings = ["","Index number","% change from previous quarter","% change from same quarter of previous year"];
-
+    $scope.end_date = '2010';
     $scope.datasets = [];
 
     var redrawTargetLine = function(chart, yPoint) {
@@ -49,37 +47,31 @@ angular.module('ecopulse')
       $scope.datasets = [];
       $scope.targetDate = Date.now();
 
-      /* Clear chart */
-      $scope.highchartsNG.series = [];
+      _.each($scope.availableDatasets, function(dataset) {
+        var datasetInfo = Datasets.getItem(dataset)
+        if(datasetInfo.dynamic) {
+          Query.dynamic(dataset, $scope.start_date, $scope.end_date).then(function(result) {
+            var processedData = Transform.process(datasetInfo.transform,result.data);
+            
+            datasetInfo.data = processedData;
+            datasetInfo.id = dataset;
 
-      _.each([1,2,3], function(prop_type) {
-        _.each([1,2,3], function(measure) {
-          Query.process($scope.dataset, prop_type, measure, $scope.start_date).then(function(result) {
-            result = Transform.convert('stat.ABS', result.data);
-
-            $scope.datasets.push({
-              id: 'dataset-' + (prop_type*10 + measure),
-              name: prop_type_strings[prop_type] + ' ' + measure_strings[measure],
-              description: "Some information about " + prop_type_strings[prop_type] + ' ' + measure_strings[measure],
-              icon: 'home',
-              data: result
-            });
-            //
+            $scope.datasets.push(datasetInfo);
             // $scope.updateChart(
-            //   result,
-            //   prop_type_strings[prop_type] + ' ' + measure_strings[measure]
+            //   processedData,
+            //   newDataset.name
             // );
+            $scope.highchartsNG.loading = false;
           });
-        });
-      });
-
-      $scope.highchartsNG.loading = false;
-    };
+        }
+      })
+    }
 
     $scope.chartSeries = function(datasetId) {
       /* Clear chart */
       $scope.highchartsNG.series = [];
 
+      /* Find the dataset */
       $scope.currentGraphedDataset = _.find($scope.datasets, function(set) {
         return set.id == datasetId;
       });
@@ -127,7 +119,7 @@ angular.module('ecopulse')
         text: "Our Economic Heartbeat"
       },
       legend: {
-        enabled: false
+        text: 'Data'
       },
       loading: false
     }
