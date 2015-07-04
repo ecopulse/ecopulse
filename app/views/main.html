@@ -9,21 +9,28 @@
         The following data sets were used to calculate Our Economic Pulse.
       </div>
 
-      <table class='table table-datasets'>
+      <table class='table table-datasets table-striped'>
         <tbody>
           <!-- Two rows for each data set:
             1. The icon, name and value of the set
             2. The full description for the set, initially hidden but may be
                shown by clicking the first row. -->
-          <tr ng-repeat-start='dataset in datasets' data-toggle='collapse' data-target='#{{dataset.id}}-description'>
+          <tr ng-repeat-start='dataset in datasets'>
             <td><span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" /></td>
             <td>{{dataset.name}}</td>
             <td>{{dataset.data[dataset.data.length - 1][1]}}</td>
+            <td>
+              <a data-toggle='collapse' data-target='#{{dataset.id}}-description'>
+                <span class='glyphicon glyphicon-info-sign' aria-hidden='true' />
+              </a>
+              <a>
+                <span class='glyphicon glyphicon-eye-open' aria-hidden='true' ng-click='chartSeries("{{dataset.id}}")' />
+              </a>
+            </td>
           </tr>
           <tr ng-repeat-end class='collapse' class='dataset-description' id='{{dataset.id}}-description'>
-            <td colspan='3'>{{dataset.description}}</td>
+            <td colspan='4'>{{dataset.description}}</td>
           </tr>
-
         </tbody>
       </table>
     </div>
