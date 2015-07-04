@@ -1,5 +1,6 @@
 <div ng-app="ecopulse">
   <div ng-controller="MainCtrl">
+    <form>
       Dataset:
       <input ng-model="dataset" disabled>
       Property type:
@@ -16,7 +17,8 @@
       </select>
       <button ng-click="getData()">Get data</button>
       <button ng-click="clearChart()">Clear chart</button>
-      
-      <highchart id="chart1" config="highchartsNG"></highchart>
+    </form>
+
+    <highchart id="chart1" config="highchartsNG" />
   </div>
 </div>
