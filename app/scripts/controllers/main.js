@@ -10,8 +10,7 @@
 angular.module('ecopulse')
   .controller('MainCtrl', function ($scope, $http, Query, Datasets, Transform) {
 
-    $scope.start_date = '2003';
-    $scope.end_date = '2010';
+    $scope.start_date = '2000';
     $scope.datasets = [];
 
     var redrawTargetLine = function(chart, yPoint) {
@@ -115,7 +114,7 @@ angular.module('ecopulse')
         text: "Our Economic Heartbeat"
       },
       legend: {
-        text: 'Data'
+        enabled: false
       },
       loading: false
     }

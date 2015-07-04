@@ -20,7 +20,7 @@ angular.module('ecopulse')
       _.pairs(item.params),
       function(pair) {
         return pair.join('.');
-      }).join(',') + '&start=' + start + '&end=' + end + '&callback=JSON_CALLBACK';
+      }).join(',') + '&start=' + start + '&callback=JSON_CALLBACK';
     }
 
     return {
