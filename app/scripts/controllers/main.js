@@ -15,44 +15,42 @@ angular.module('ecopulse')
     var prop_type_strings = ["","Attached dwellings","Established houses","Residential property"];
     var measure_strings = ["","Index number","% change from previous quarter","% change from same quarter of previous year"];
 
-    /* Hard-code some datasets for now */
-    $scope.datasets = [
-      {
-        id: 'established-houses-index',
-        name: 'Established Houses (index)',
-        description: "Some information about Established Houses (index)",
-        icon: 'home',
-        data: [['2015-06', 90]]
-      },
-      {
-        id: 'established-houses-change-quarter',
-        name: 'Established Houses - change since previous quarter',
-        description: "Some information about Established Houses - change since previous quarter",
-        icon: 'home',
-        data: [['2015-06', 90]]
-      },
-      {
-        id: 'established-houses-change-year',
-        name: 'Established Houses - change since previous year',
-        description: "Some information about Established Houses - change since previous year",
-        icon: 'home',
-        data: [['2015-06', 90]]
-      }
-    ];
+    $scope.datasets = [];
 
     $scope.getData = function () {
       $scope.highchartsNG.loading = true;
 
-      Query.process($scope.dataset, $scope.prop_type, $scope.measure, $scope.start_date).then(function(result) {
-        $scope.highchartsNG.loading = false;
-        $scope.updateChart(Transform.convert('stat.ABS', result.data));
+      $scope.datasets = [];
+
+      _.each([1,2,3], function(prop_type) {
+        _.each([1,2,3], function(measure) {
+          Query.process($scope.dataset, prop_type, measure, $scope.start_date).then(function(result) {
+            console.debug(result);
+            result = Transform.convert('stat.ABS', result.data);
+
+            $scope.datasets.push({
+              id: 'dataset-' + (prop_type*10 + measure),
+              name: prop_type_strings[prop_type] + ' ' + measure_strings[measure],
+              description: "Some information about " + prop_type_strings[prop_type] + ' ' + measure_strings[measure],
+              icon: 'home',
+              data: result
+            });
+
+            $scope.updateChart(
+              result,
+              prop_type_strings[prop_type] + ' ' + measure_strings[measure]
+            );
+          });
+        });
       });
+
+      $scope.highchartsNG.loading = false;
     };
 
-    $scope.updateChart = function(vals) {
+    $scope.updateChart = function(vals, title) {
       $scope.highchartsNG.series.push({
         data: vals,
-        name: prop_type_strings[$scope.prop_type] + ' ' + measure_strings[$scope.measure]
+        name: title
       })
     }
 

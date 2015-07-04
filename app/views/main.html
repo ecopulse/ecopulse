@@ -1,24 +1,5 @@
 <div ng-app="ecopulse">
-  <div ng-controller="MainCtrl">
-    <form>
-      Dataset:
-      <input ng-model="dataset" disabled>
-      Property type:
-      <select ng-model="prop_type">
-        <option value="1">Attached dwellings</option>
-        <option value="2">Established houses</option>
-        <option value="3">Residential property</option>
-      </select>
-      Measure:
-      <select ng-model="measure">
-        <option value="1">Index number</option>
-        <option value="2">% change from previous quarter</option>
-        <option value="3">% change from same quarter of previous year</option>
-      </select>
-      <button ng-click="getData()">Get data</button>
-      <button ng-click="clearChart()">Clear chart</button>
-    </form>
-
+  <div ng-controller="MainCtrl" data-ng-init='getData()'>
     <highchart id="chart1" config="highchartsNG" />
 
     <div class='panel panel-default'>
@@ -30,17 +11,14 @@
 
       <table class='table table-datasets'>
         <tbody>
-
-          <!--
-            Two rows for each data set:
+          <!-- Two rows for each data set:
             1. The icon, name and value of the set
             2. The full description for the set, initially hidden but may be
-               shown by clicking the first row.
-          -->
+               shown by clicking the first row. -->
           <tr ng-repeat-start='dataset in datasets' data-toggle='collapse' data-target='#{{dataset.id}}-description'>
             <td><span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" /></td>
             <td>{{dataset.name}}</td>
-            <td>{{dataset.data[0][1]}}</td>
+            <td>{{dataset.data[dataset.data.length - 1][1]}}</td>
           </tr>
           <tr ng-repeat-end class='collapse' class='dataset-description' id='{{dataset.id}}-description'>
             <td colspan='3'>{{dataset.description}}</td>
