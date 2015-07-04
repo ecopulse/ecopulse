@@ -9,19 +9,28 @@
  */
 
 angular.module('ecopulse')
-  .service('Query', function($http) {
+  .service('Query', function($http, Datasets, Transform) {
 
-    var baseUrl = 'http://stat.abs.gov.au/itt/query.jsp?method=GetGenericData&datasetid=';
+    var baseUrl = 'http://stat.abs.gov.au/itt/query.jsp?method=GetGenericData';
+
+    function statAbsQuery(id, start, end) {
+      var item = Datasets.getItem(id);
+      return baseUrl + '&datasetid=' + item.dataset + '&and=' +
+      _.map(
+      _.pairs(item.params),
+      function(pair) {
+        return pair.join('.');
+      }).join(',') + '&start=' + start + '&end=' + end + '&callback=JSON_CALLBACK';
+    }
 
     return {
-      process: function(dataset,prop_type,measure,start_date) {
-        return $http.jsonp(baseUrl + dataset + '&and=PROP_TYPE.' + prop_type + ',ASGS_2011.100,MEASURE.' + measure + '&start=' + start_date + '&callback=JSON_CALLBACK')
-          .success(function(result) {
-            return result.data;
-          })
-          .error(function (result) {
-            console.log("Request failed");
-          });
+      dynamic: function(id, start, end) {
+        return $http.jsonp(statAbsQuery(id, start, end))
+        .success(function(result) {
+        })
+        .error(function (result) {
+          console.log("Request failed");
+        });
       }
     }
 });

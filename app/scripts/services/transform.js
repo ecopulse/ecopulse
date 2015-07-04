@@ -11,26 +11,34 @@
 angular.module('ecopulse')
   .service('Transform', function() {
 
-    var transformationFunctions = [];
+    var transforms = [];
 
-    /* stat.ABS */
-    transformationFunctions['stat.ABS'] = function(dataset) {
+    /* stat.ABS quarterly*/
+    transforms['ABS.Stat.Q'] = function(dataset) {
       return _.map(dataset.series[0].observations, function(ob) {
         var dateTimeArr = ob.Time.split("-");
-
-        /* Convert 2015-Q2 into a datetime object */
+        /* Convert 2015-Qx into a datetime object */
         var x = Date.UTC(parseInt(dateTimeArr[0]), parseInt(dateTimeArr[1][1])*3, 1);
         /* Convert string into a float object */
         var y = parseFloat(ob.Value);
-
         /* Return the coordinates for this point */
         return [x, y];
       });
     }
 
-    return {
-      convert: function(dataSource, dataset) {
-        return transformationFunctions[dataSource](dataset);
-      }
+    transforms['ABS.Stat.M'] = function(dataset) {
+      return _.map(dataset.series[0].observations, function(ob) {
+        var dateTimeArr = ob.Time.split("-");
+        /* Convert 2015-xx into a datetime object */
+        var x = Date.UTC(parseInt(dateTimeArr[0]), parseInt(dateTimeArr[1]), 1);
+        /* Convert string into a float object */
+        var y = parseFloat(ob.Value);
+        /* Return the coordinates for this point */
+        return [x, y];
+      });
+    }
+
+    this.process = function(id, data) {
+        return transforms[id](data);
     }
 });
