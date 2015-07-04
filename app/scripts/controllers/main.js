@@ -15,6 +15,31 @@ angular.module('ecopulse')
     var prop_type_strings = ["","Attached dwellings","Established houses","Residential property"];
     var measure_strings = ["","Index number","% change from previous quarter","% change from same quarter of previous year"];
 
+    /* Hard-code some datasets for now */
+    $scope.datasets = [
+      {
+        id: 'established-houses-index',
+        name: 'Established Houses (index)',
+        description: "Some information about Established Houses (index)",
+        icon: 'home',
+        data: [['2015-06', 90]]
+      },
+      {
+        id: 'established-houses-change-quarter',
+        name: 'Established Houses - change since previous quarter',
+        description: "Some information about Established Houses - change since previous quarter",
+        icon: 'home',
+        data: [['2015-06', 90]]
+      },
+      {
+        id: 'established-houses-change-year',
+        name: 'Established Houses - change since previous year',
+        description: "Some information about Established Houses - change since previous year",
+        icon: 'home',
+        data: [['2015-06', 90]]
+      }
+    ];
+
     $scope.getData = function () {
       $scope.highchartsNG.loading = true;
 
