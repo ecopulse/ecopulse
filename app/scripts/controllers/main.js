@@ -10,7 +10,6 @@
 angular.module('ecopulse')
   .controller('MainCtrl', function ($scope, $http, Query, Datasets, Transform) {
 
-    $scope.availableDatasets = ['CPI','UE'];
     $scope.start_date = '2003';
     $scope.end_date = '2010';
     $scope.datasets = [];
@@ -47,14 +46,14 @@ angular.module('ecopulse')
       $scope.datasets = [];
       $scope.targetDate = Date.now();
 
-      _.each($scope.availableDatasets, function(dataset) {
-        var datasetInfo = Datasets.getItem(dataset)
+      _.each(Datasets.getIds(), function(id) {
+        var datasetInfo = Datasets.getItem(id)
         if(datasetInfo.dynamic) {
-          Query.dynamic(dataset, $scope.start_date, $scope.end_date).then(function(result) {
+          Query.dynamic(id, $scope.start_date, $scope.end_date).then(function(result) {
             var processedData = Transform.process(datasetInfo.transform,result.data);
-            
+
             datasetInfo.data = processedData;
-            datasetInfo.id = dataset;
+            datasetInfo.id = id;
 
             $scope.datasets.push(datasetInfo);
             // $scope.updateChart(

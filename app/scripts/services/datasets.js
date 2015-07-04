@@ -26,7 +26,7 @@ angular.module('ecopulse')
         name: 'CPI Annual Change',
         dynamic: true,
         description: "Info about the consumer price index",
-        icon: 'home',
+        icon: 'tag',
         source: 'ABS.Stat',
         dataset: 'CPI',
         transform: 'ABS.Stat.Q',
@@ -34,7 +34,7 @@ angular.module('ecopulse')
           'FREQUENCY': 'Q', // Quarterly data
           'TSEST': '20', // Seasonally Adjusted
           'REGION': '50', // Weighted average of eight capital cities
-          'MEASURE': '3', // Percentage Change from Corresponding Quarter of the Previous Year'
+          'MEASURE': '3', // Percentage Change from Corresponding Quarter of the Previous Year
           'INDEX' : '999901' // All groups CPI, seasonally adjusted
         }
       }
@@ -43,7 +43,7 @@ angular.module('ecopulse')
           name: 'Unemployment Rate',
           dynamic: true,
           description: "Info about the unemployment rate",
-          icon: 'home',
+          icon: 'user',
           source: 'ABS.Stat',
           dataset: 'LF',
           transform: 'ABS.Stat.M',
@@ -55,5 +55,23 @@ angular.module('ecopulse')
             'ITEM' : '14', // Unemployment rate
             'ASGC_2010': '0' // Australia wide
           }
+        }
+        items['WG'] = {
+            name: 'Wages Annual Change',
+            dynamic: true,
+            description: "Info about wage growth",
+            icon: 'usd',
+            source: 'ABS.Stat',
+            dataset: 'LABOUR_PRICE_INDEX',
+            transform: 'ABS.Stat.Q',
+            params: {
+              'FREQUENCY': 'Q', // Quarterly data
+              'TSEST': '20', // Seasonally Adjusted
+              'INDEX': 'THRPEB', // Total hourly rates of pay excluding bonuses
+              'SECTOR': '7', // All Sectors
+              'MEASURE' : '3', // Percentage Change from Corresponding Quarter of the Previous Year
+              'REGION': '0', // Australia wide
+              'INDUSTRY': '-' // All industries
+            }
         }
 });
