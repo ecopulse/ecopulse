@@ -18,7 +18,7 @@
           <tr ng-repeat-start='dataset in datasets'>
             <td><span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" /></td>
             <td>{{dataset.name}}</td>
-            <td>{{dataset.data[dataset.data.length - 1][1]}}</td>
+            <td>{{dataset.data[dataset.data.length - 1].y}}</td>
             <td>
               <a data-toggle='collapse' data-target='#{{dataset.id}}-description'>
                 <span class='glyphicon glyphicon-info-sign' aria-hidden='true' />

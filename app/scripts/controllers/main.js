@@ -50,16 +50,21 @@ angular.module('ecopulse')
         var datasetInfo = Datasets.getItem(id)
         if(datasetInfo.dynamic) {
           Query.dynamic(id, $scope.start_date, $scope.end_date).then(function(result) {
-            var processedData = Transform.process(datasetInfo.transform,result.data);
+            // Import the data from the data source
+            datasetInfo.data = Transform.process(datasetInfo.transform,result.data);
 
-            datasetInfo.data = processedData;
+            var lastIndex = datasetInfo.data.length - 1;
+            datasetInfo.data[lastIndex] = {
+              x: datasetInfo.data[lastIndex][0],
+              y: datasetInfo.data[lastIndex][1],
+              dataLabels: { enabled: true }
+            }
+
+            // Set the ID for later use
             datasetInfo.id = id;
 
             $scope.datasets.push(datasetInfo);
-            // $scope.updateChart(
-            //   processedData,
-            //   newDataset.name
-            // );
+
             $scope.highchartsNG.loading = false;
           });
         }
@@ -86,14 +91,6 @@ angular.module('ecopulse')
           events:{
             click: $scope.updateTargetDate
           }
-        },
-        plotOptions: {
-            line: {
-                dataLabels: {
-                    enabled: true
-                },
-                enableMouseTracking: false
-            }
         },
         xAxis: {
           type: 'datetime',
