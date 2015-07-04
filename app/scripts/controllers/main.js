@@ -47,26 +47,24 @@ angular.module('ecopulse')
 
       _.each(Datasets.getIds(), function(id) {
         var datasetInfo = Datasets.getItem(id)
-        if(datasetInfo.dynamic) {
-          Query.dynamic(id, $scope.start_date, $scope.end_date).then(function(result) {
-            // Import the data from the data source
-            datasetInfo.data = Transform.process(datasetInfo.transform,result.data);
+        Query.process(datasetInfo, $scope.start_date, $scope.end_date).then(function(result) {
+          // Import the data from the data source
+          datasetInfo.data = Transform.process(datasetInfo.transform,result.data);
 
-            var lastIndex = datasetInfo.data.length - 1;
-            datasetInfo.data[lastIndex] = {
-              x: datasetInfo.data[lastIndex][0],
-              y: datasetInfo.data[lastIndex][1],
-              dataLabels: { enabled: true }
-            }
+          var lastIndex = datasetInfo.data.length - 1;
+          datasetInfo.data[lastIndex] = {
+            x: datasetInfo.data[lastIndex][0],
+            y: datasetInfo.data[lastIndex][1],
+            dataLabels: { enabled: true }
+          }
 
-            // Set the ID for later use
-            datasetInfo.id = id;
+          // Set the ID for later use
+          datasetInfo.id = id;
 
-            $scope.datasets.push(datasetInfo);
+          $scope.datasets.push(datasetInfo);
 
-            $scope.highchartsNG.loading = false;
-          });
-        }
+          $scope.highchartsNG.loading = false;
+        });
       })
     }
 

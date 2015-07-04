@@ -74,4 +74,13 @@ angular.module('ecopulse')
               'INDUSTRY': '-' // All industries
             }
         }
+        items['CHARITY'] = {
+            name: 'Charity',
+            dynamic: false,
+            description: "Info about charity",
+            icon: 'thumbs-up',
+            source: 'TBA',
+            dataset: '/data/charity.json',
+            transform: 'static'
+        }
 });

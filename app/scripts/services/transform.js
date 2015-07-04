@@ -38,6 +38,14 @@ angular.module('ecopulse')
       });
     }
 
+    transforms['static'] = function(dataset) {
+      return _.map(dataset, function(ob) {
+        /* Return the coordinates for this point */
+        return [ob.Time, ob.Value];
+      });
+    }
+
+
     this.process = function(id, data) {
         return transforms[id](data);
     }
