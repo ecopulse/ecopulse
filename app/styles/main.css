@@ -30,6 +30,15 @@ body {
   padding-bottom: 19px;
 }
 
+/* Custom header icon */
+.navbar-icon {
+  float: left;
+  height: 50px;
+  padding: 10px 12px;
+  font-size: 18px;
+  line-height: 40px;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
