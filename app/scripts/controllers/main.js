@@ -36,16 +36,8 @@ angular.module('ecopulse')
         name: "Australia's Economic Heartbeat",
         yAxis: 0, // Plot this on the first y axis
         data: randomData,
-        color: '#c64841'
+        color: '#c79390'
       };
-
-      // Show the data label on the last point
-      var lastIndex = chartData.data.length - 1;
-      chartData.data[lastIndex] = {
-        x: chartData.data[lastIndex][0],
-        y: chartData.data[lastIndex][1],
-        dataLabels: { enabled: true }
-      }
 
       $scope.highchartsNG.series.push(chartData);
 
@@ -148,13 +140,13 @@ angular.module('ecopulse')
           {
             title: {
               text: 'Hearbeat Index'
-            }
+            },
+            opposite: true
           },
           {
             title: {
               text: ''
-            },
-            opposite: true
+            }
           }
         ],
         plotOptions: {
