@@ -29,6 +29,8 @@ angular.module('ecopulse')
         icon: 'tag',
         source: 'ABS.Stat',
         dataset: 'CPI',
+        frequency: 'Q',
+        weighting: 0.25,
         transform: 'ABS.Stat.Q',
         params: {
           'FREQUENCY': 'Q', // Quarterly data
@@ -46,6 +48,8 @@ angular.module('ecopulse')
           icon: 'user',
           source: 'ABS.Stat',
           dataset: 'LF',
+          frequency: 'M',
+          weighting: 0.25,
           transform: 'ABS.Stat.M',
           params: {
             'FREQUENCY': 'M', // Monthly data
@@ -63,6 +67,8 @@ angular.module('ecopulse')
             icon: 'usd',
             source: 'ABS.Stat',
             dataset: 'LABOUR_PRICE_INDEX',
+            frequency: 'Q',
+            weighting: 0.25,
             transform: 'ABS.Stat.Q',
             params: {
               'FREQUENCY': 'Q', // Quarterly data
@@ -81,6 +87,8 @@ angular.module('ecopulse')
             icon: 'thumbs-up',
             source: 'TBA',
             dataset: '/data/charity.json',
+            frequency: 'A',
+            weighting: 0.25,
             transform: 'static'
         }
 });
