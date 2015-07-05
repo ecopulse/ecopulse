@@ -37,7 +37,7 @@ angular.module('ecopulse')
       source: 'ABS.Stat',
       dataset: 'CPI',
       frequency: 'Q',
-      weighting: 0.25,
+      weight: 0.1,
       transform: 'ABS.Stat.Q',
       params: {
         'FREQUENCY': 'Q', // Quarterly data
@@ -59,7 +59,7 @@ angular.module('ecopulse')
       source: 'ABS.Stat',
       dataset: 'LF',
       frequency: 'M',
-      weighting: 0.25,
+      weight: 0.1,
       transform: 'ABS.Stat.M',
       params: {
         'FREQUENCY': 'M', // Monthly data
@@ -81,7 +81,7 @@ angular.module('ecopulse')
       source: 'ABS.Stat',
       dataset: 'LABOUR_PRICE_INDEX',
       frequency: 'Q',
-      weighting: 0.25,
+      weight: 0.1,
       transform: 'ABS.Stat.Q',
       params: {
         'FREQUENCY': 'Q', // Quarterly data
@@ -104,7 +104,7 @@ angular.module('ecopulse')
       source: 'ACNC',
       dataset: '/data/charity.json',
       frequency: 'A',
-      weighting: 0.25,
+      weight: 0.1,
       transform: 'static'
     }
     items['income20'] = {
@@ -117,6 +117,8 @@ angular.module('ecopulse')
       seriesColour: '#8085e9',
       source: 'Household Income and Income Distribution, ABS 6523.0',
       dataset: '/data/income20.json',
+      frequency: 'A',
+      weight: 0.1,
       transform: 'static'
     }
     items['commodity'] = {
@@ -129,6 +131,8 @@ angular.module('ecopulse')
       seriesColour: '#f15c80',
       source: ' http://www.rba.gov.au/statistics/frequency/commodity-prices.html',
       dataset: '/data/commodity.json',
+      frequency: 'M',
+      weight: 0.1,
       transform: 'static'
     }
 
@@ -142,6 +146,8 @@ angular.module('ecopulse')
       seriesColour: '#e4d354',
       source: 'IPGOD',
       dataset: '/data/innovation.json',
+      frequency: 'A',
+      weight: 0.1,
       transform: 'static'
     }
     items['GDP'] = {
@@ -154,6 +160,8 @@ angular.module('ecopulse')
       seriesColour: '#2b908f',
       source: 'ABS',
       dataset: '/data/gdp.json',
+      frequency: 'Q',
+      weight: 0.1,
       transform: 'static'
     }
     items['profit'] = {
@@ -166,6 +174,8 @@ angular.module('ecopulse')
       seriesColour: '#f45b5b',
       source: 'ABS, APRA',
       dataset: '/data/profits.json',
+      frequency: 'Q',
+      weight: 0.1,
       transform: 'static'
     }
   });

@@ -68,10 +68,9 @@ angular.module('ecopulse')
           $scope.queriesRunning = _.without($scope.queriesRunning, id);
           if($scope.queriesRunning.length <= 0) {
             Combine.heartbeat($scope.datasets);
-            chartHeartbeat();
           }
         });
-      })
+      });
     }
 
     $scope.chartSeries = function(datasetId) {
