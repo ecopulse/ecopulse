@@ -18,12 +18,17 @@
           <tr ng-repeat-start='dataset in datasets' data-toggle='collapse' data-target='#{{dataset.id}}-description'>
             <td><span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" /></td>
             <td>{{dataset.name}}</td>
-            <td>{{dataset.data[dataset.data.length - 1].y}}</td>
+            <td>{{dataset.data[dataset.data.length - 1].y.toFixed(2)}}</td>
           </tr>
           <tr ng-repeat-end class='collapse' class='dataset-description' id='{{dataset.id}}-description'>
             <td colspan='3'>
-              <span class='glyphicon glyphicon-eye-open' aria-hidden='true' ng-click='chartSeries("{{dataset.id}}")' />
               <p>{{dataset.description}}</p>
+                <div style='text-align: center'>
+                <button class='btn btn-default' ng-click='chartSeries("{{dataset.id}}")'>
+                  <span class='glyphicon glyphicon-eye-open' aria-hidden='true' />
+                  Plot on chart
+                </button>
+              </div>
             </td>
           </tr>
         </tbody>
