@@ -14,12 +14,14 @@
            role="button" ng-click='chartSeries("{{dataset.id}}")'
            data-toggle="collapse" data-parent="#accordion" href="#collapse-{{dataset.id}}"
            aria-expanded="true" aria-controls="collapse-{{dataset.id}}">
-          <h4 class="panel-title row">
-            <div class='col-sm-8'>
-              <span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" />
-              {{dataset.name}}
+          <h4 class="panel-title">
+            <div class='row'>
+              <div class='col-xs-8'>
+                <span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" />
+                {{dataset.name}}
+              </div>
+              <div class='col-xs-4 text-right'>{{dataset.latest}}</div>
             </div>
-            <div class='col-sm-4 text-right'>{{dataset.latest}}</div>
           </h4>
         </div>
         <div id="collapse-{{dataset.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{dataset.id}}">
