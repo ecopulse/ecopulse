@@ -13,31 +13,6 @@ angular.module('ecopulse')
     $scope.start_date = '2000';
     $scope.datasets = [];
 
-    var redrawTargetLine = function(chart, yPoint) {
-      // Get rid of the old target line
-      if ($scope.targetLine) { $scope.targetLine.destroy(); }
-
-      // Draw the new target line
-      $scope.targetLine = chart.renderer
-        .path(['M', yPoint, chart.plotTop, 'V', chart.plotSizeY + chart.plotTop])
-        .attr({
-          'stroke-width': 1,
-          stroke: 'silver',
-          dashstyle: 'dash'
-      });
-
-      // Draw the new line on the chart object
-      $scope.targetLine.add();
-    }
-
-    $scope.updateTargetDate = function(ev) {
-      // Current scope is the chart
-      redrawTargetLine(this, ev.chartX);
-
-      // Update the global target date
-      $scope.targetDate = this.xAxis[0].toValue(ev.chartX);
-    };
-
     $scope.getData = function () {
       $scope.highchartsNG.loading = true;
 
@@ -111,9 +86,6 @@ angular.module('ecopulse')
       title: {
         text: "Our Economic Heartbeat"
       },
-      legend: {
-        enabled: false
-      },
-      loading: false
+      loading: true
     }
   });
