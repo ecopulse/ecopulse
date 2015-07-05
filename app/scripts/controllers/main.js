@@ -41,6 +41,9 @@ angular.module('ecopulse')
           // Plot this on the second y axis
           dataset.yAxis = 1;
 
+          // Format the latest value for output in the table
+          dataset.latest = dataset.formatter(dataset.data[dataset.data.length - 1].y);
+
           $scope.datasets.push(dataset);
 
           $scope.queriesRunning = _.without($scope.queriesRunning, id);

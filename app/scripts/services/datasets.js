@@ -20,6 +20,10 @@ angular.module('ecopulse')
         return items[id];
     }
 
+    var numValue = function(number) { return number; };
+
+    var percentValue = function(number) { return number.toFixed(2) + '%'; };
+
     var items = {};
 
     items['CPI'] = {
@@ -28,6 +32,7 @@ angular.module('ecopulse')
         description: "Info about the consumer price index",
         icon: 'tag',
         units: 'Percent',
+        formatter: percentValue,
         source: 'ABS.Stat',
         dataset: 'CPI',
         frequency: 'Q',
@@ -48,6 +53,7 @@ angular.module('ecopulse')
           description: "Info about the unemployment rate",
           icon: 'user',
           units: 'Percent',
+        formatter: percentValue,
           source: 'ABS.Stat',
           dataset: 'LF',
           frequency: 'M',
@@ -68,6 +74,7 @@ angular.module('ecopulse')
             description: "Info about wage growth",
             icon: 'usd',
             units: 'Percent',
+            formatter: percentValue,
             source: 'ABS.Stat',
             dataset: 'LABOUR_PRICE_INDEX',
             frequency: 'Q',
@@ -89,6 +96,7 @@ angular.module('ecopulse')
             description: "Info about charity",
             icon: 'thumbs-up',
             units: 'Percent',
+            formatter: percentValue,
             source: 'TBA',
             dataset: '/data/charity.json',
             frequency: 'A',
