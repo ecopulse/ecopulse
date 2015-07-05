@@ -27,9 +27,9 @@ angular.module('ecopulse')
     var items = {};
 
     items['CPI'] = {
-      name: 'CPI Annual Change',
+      name: 'Inflation',
       dynamic: true,
-      description: "This data set contains the percentage change of the Consumer Price Index for all groups after a year. It is seasonally adjusted data released quarterly on stat.ABS.",
+      description: "Seasonally adjusted CPI",
       icon: 'tag',
       units: 'Percent',
       formatter: percentValue,
@@ -51,7 +51,7 @@ angular.module('ecopulse')
     items['UE'] = {
       name: 'Unemployment Rate',
       dynamic: true,
-      description: "This data set contains the Australia wide unemployment rate for all persons of all ages. It is seasonally adjusted data released monthly on stat.ABS.",
+      description: "Seasonally adjusted unemployment rate.",
       icon: 'user',
       units: 'Percent',
       formatter: percentValue,
@@ -71,9 +71,9 @@ angular.module('ecopulse')
       }
     }
     items['WG'] = {
-      name: 'Wages Annual Change',
+      name: 'Annual Wage Growth',
       dynamic: true,
-      description: "Info about wage growth",
+      description: "Wage price index total hourly rate of pay (excluding bonuses)",
       icon: 'usd',
       units: 'Percent',
       formatter: percentValue,
@@ -94,7 +94,7 @@ angular.module('ecopulse')
       }
     }
     items['CHARITY'] = {
-      name: 'Charity',
+      name: 'Number of Charities',
       dynamic: false,
       description: "Annual growth in registered charities (%)",
       icon: 'thumbs-up',
@@ -108,7 +108,7 @@ angular.module('ecopulse')
       transform: 'static'
     }
     items['income20'] = {
-      name: 'Income for less advantaged',
+      name: 'Income for the less advantaged',
       dynamic: false,
       description: "Annual growth in household income (equivalised income, real dollars) at 20th percentile of income distribution  "  ,
       icon: 'piggy-bank',
@@ -137,7 +137,7 @@ angular.module('ecopulse')
     }
 
     items['innovation'] = {
-      name: 'Innovation',
+      name: 'Innovation growth',
       dynamic: false,
       description: "Annual growth in patent applications"  ,
       icon: 'filter',
@@ -151,7 +151,7 @@ angular.module('ecopulse')
       transform: 'static'
     }
     items['GDP'] = {
-      name: 'GDP',
+      name: 'Annual GDP growth',
       dynamic: false,
       description: "Annual GDP growth (%), seasonally adjusted, expenditure method"  ,
       icon: 'globe',
@@ -165,7 +165,7 @@ angular.module('ecopulse')
       transform: 'static'
     }
     items['profit'] = {
-      name: 'Company Profits',
+      name: 'Growth in company profits',
       dynamic: false,
       description: "Annual growth (%) in company profits"  ,
       icon: 'briefcase',
