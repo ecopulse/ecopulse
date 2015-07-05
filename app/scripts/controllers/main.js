@@ -13,6 +13,34 @@ angular.module('ecopulse')
     $scope.start_date = '2000';
     $scope.datasets = [];
 
+    var chartHeartbeat = function() {
+      $scope.highchartsNG.loading = true;
+
+      // Reset the chart series. This ensures the heartbeat is first!
+      $scope.highchartsNG.series = []
+
+      // Hax
+      var dataset = $scope.datasets[0]
+
+      var chartData = {
+        name: "Australia's Economic Heartbeat",
+        yAxis: 0, // Plot this on the first y axis
+        data: _.clone(dataset.data)
+      };
+
+      // Show the data label on the last point
+      var lastIndex = chartData.data.length - 1;
+      chartData.data[lastIndex] = {
+        x: chartData.data[lastIndex][0],
+        y: chartData.data[lastIndex][1],
+        dataLabels: { enabled: true }
+      }
+
+      $scope.highchartsNG.series.push(chartData);
+
+      $scope.highchartsNG.loading = false;
+    }
+
     $scope.getData = function () {
       $scope.highchartsNG.loading = true;
 
@@ -36,8 +64,10 @@ angular.module('ecopulse')
           $scope.datasets.push(dataset);
 
           $scope.queriesRunning = _.without($scope.queriesRunning, id);
-          if($scope.queriesRunning.length <= 0)
+          if($scope.queriesRunning.length <= 0) {
             Combine.heartbeat($scope.datasets);
+            chartHeartbeat();
+          }
         });
       })
     }
