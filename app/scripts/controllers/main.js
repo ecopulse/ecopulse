@@ -80,6 +80,24 @@ angular.module('ecopulse')
           title: {
             text: 'Value'
           }
+        },
+        plotOptions: {
+          line: {
+            dataLabels: {
+              formatter: function() {
+                return this.y.toFixed(2);
+              }
+            },
+            tooltip: {
+              pointFormatter: function() {
+                return '<span style="color:{point.color}">\u25CF</span>' +
+                  this.series.name +
+                  ': <b>' +
+                  this.y.toFixed(2) +
+                  '</b><br/>';
+              }
+            }
+          }
         }
       },
       series: [],
