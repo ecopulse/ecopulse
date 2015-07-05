@@ -45,7 +45,9 @@ angular.module('ecopulse')
 
     $scope.chartSeries = function(datasetId) {
       /* Clear chart */
-      $scope.highchartsNG.series = [];
+      if ($scope.highchartsNG.series.length > 1) {
+        $scope.highchartsNG.series.pop();
+      }
 
       /* Find the dataset */
       $scope.currentGraphedDataset = _.find($scope.datasets, function(set) {
