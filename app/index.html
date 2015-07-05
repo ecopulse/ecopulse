@@ -84,6 +84,7 @@
               <li>Australian Prudential Regulator</li>
               <li><a href='http://data.govspace.gov.au/organization/acnc'>ACNC</a> for Charity count data</li>
               <li><a href='http://data.govspace.gov.au/dataset/ntellectual-property-government-open-data-2015'>IPGOD</a> for patent application data</li>
+              <li>RBA</li>
             </ul>
 
             <hr />
@@ -121,5 +122,12 @@
     <script src="scripts/services/combine.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <!-- endbuild -->
-</body>
+
+    <!-- Fix for iphones refusing to play nice -->
+    <script type='text/javascript'>
+      $('.panel-heading').on('click', function () {
+          $($(this).data('target')).collapse('toggle');
+      });
+    </script>
+  </body>
 </html>
