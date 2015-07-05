@@ -17,10 +17,9 @@
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
       <div ng-repeat='dataset in datasets' class="panel panel-default">
         <div class="panel-heading" id="heading-{{dataset.id}}"
-           role="button" ng-click='chartSeries("{{dataset.id}}")'
-           data-toggle="collapse" data-parent="#accordion" href="#collapse-{{dataset.id}}"
-           aria-expanded="true" aria-controls="collapse-{{dataset.id}}">
-          <h4 class="row panel-title">
+           role="button" ng-click='chartSeries("{{dataset.id}}")'>
+          <h4 class="row panel-title" aria-expanded="true" aria-controls="collapse-{{dataset.id}}"
+          data-toggle="collapse" data-parent="#accordion" href="#collapse-{{dataset.id}}">
             <div class='col-xs-8'>
               <span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" />
               {{dataset.name}}
