@@ -45,7 +45,6 @@ angular.module('ecopulse')
       });
     }
 
-
     this.process = function(id, data) {
         return transforms[id](data);
     }

@@ -8,7 +8,7 @@
  * Controller of ecopulse
  */
 angular.module('ecopulse')
-  .controller('MainCtrl', function ($scope, $http, Query, Datasets, Transform) {
+  .controller('MainCtrl', function ($scope, $http, Query, Datasets, Transform, Combine) {
 
     $scope.start_date = '2000';
     $scope.datasets = [];
@@ -19,26 +19,30 @@ angular.module('ecopulse')
       /* Reset datasets */
       $scope.datasets = [];
       $scope.targetDate = Date.now();
+      $scope.queriesRunning = Datasets.getIds();
 
       _.each(Datasets.getIds(), function(id) {
-        var datasetInfo = Datasets.getItem(id)
-        Query.process(datasetInfo, $scope.start_date, $scope.end_date).then(function(result) {
+        var dataset = Datasets.getItem(id)
+        Query.process(dataset, $scope.start_date, $scope.end_date).then(function(result) {
           // Import the data from the data source
-          datasetInfo.data = Transform.process(datasetInfo.transform,result.data);
+          dataset.data = Transform.process(dataset.transform,result.data);
 
-          var lastIndex = datasetInfo.data.length - 1;
-          datasetInfo.data[lastIndex] = {
-            x: datasetInfo.data[lastIndex][0],
-            y: datasetInfo.data[lastIndex][1],
+          var lastIndex = dataset.data.length - 1;
+          dataset.data[lastIndex] = {
+            x: dataset.data[lastIndex][0],
+            y: dataset.data[lastIndex][1],
             dataLabels: { enabled: true }
           }
 
           // Set the ID for later use
-          datasetInfo.id = id;
+          dataset.id = id;
 
-          $scope.datasets.push(datasetInfo);
+          $scope.datasets.push(dataset);
 
           $scope.highchartsNG.loading = false;
+          $scope.queriesRunning = _.without($scope.queriesRunning, id);
+          if($scope.queriesRunning.length <= 0)
+            Combine.heartbeat($scope.datasets);
         });
       })
     }
