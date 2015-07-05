@@ -24,25 +24,14 @@ angular.module('ecopulse')
       _.each(Datasets.getIds(), function(id) {
         var dataset = Datasets.getItem(id)
         Query.process(dataset, $scope.start_date, $scope.end_date).then(function(result) {
-          // Import the data from the data source
-          dataset.data = Transform.process(dataset.transform,result.data);
-
-          // Show the data label on the last point
-          var lastIndex = dataset.data.length - 1;
-          dataset.data[lastIndex] = {
-            x: dataset.data[lastIndex][0],
-            y: dataset.data[lastIndex][1],
-            dataLabels: { enabled: true }
-          }
-
           // Set the ID for later use
           dataset.id = id;
 
-          // Plot this on the second y axis
-          dataset.yAxis = 1;
+          // Import the data from the data source
+          dataset.data = Transform.process(dataset.transform,result.data);
 
           // Format the latest value for output in the table
-          dataset.latest = dataset.formatter(dataset.data[dataset.data.length - 1].y);
+          dataset.latest = dataset.formatter(dataset.data[dataset.data.length - 1][1]);
 
           $scope.datasets.push(dataset);
 
@@ -61,13 +50,27 @@ angular.module('ecopulse')
         $scope.highchartsNG.series.pop();
 
       /* Find the dataset */
-      $scope.currentGraphedDataset = _.find($scope.datasets, function(set) {
+      var dataset = _.find($scope.datasets, function(set) {
         return set.id == datasetId;
       });
 
-      $scope.highchartsNG.title.text = $scope.currentGraphedDataset.name;
-      $scope.highchartsNG.options.yAxis[1].title.text = $scope.currentGraphedDataset.units;
-      $scope.highchartsNG.series.push($scope.currentGraphedDataset);
+      var chartData = {
+        name: dataset.name,
+        yAxis: 1, // Plot this on the second y axis
+        data: _.clone(dataset.data)
+      };
+
+      // Show the data label on the last point
+      var lastIndex = chartData.data.length - 1;
+      chartData.data[lastIndex] = {
+        x: chartData.data[lastIndex][0],
+        y: chartData.data[lastIndex][1],
+        dataLabels: { enabled: true }
+      }
+
+      $scope.highchartsNG.title.text = dataset.name;
+      $scope.highchartsNG.options.yAxis[1].title.text = dataset.units;
+      $scope.highchartsNG.series.push(chartData);
 
       $scope.highchartsNG.loading = false;
     }
