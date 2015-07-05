@@ -1,34 +1,31 @@
 <div ng-app="ecopulse">
   <div ng-controller="MainCtrl" data-ng-init='getData()'>
     <highchart id="chart1" config="highchartsNG" />
+    <hr />
+    <h4>Data Sets</h4>
 
-    <div class='panel panel-default'>
-      <div class='panel-heading'>Data Sets</div>
+    <p>
+      The following data sets were used to calculate Australia's Economic Heartbeat.
+    </p>
 
-      <div class='panel-body'>
-        The following data sets were used to calculate Australia's Economic Heartbeat.
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div ng-repeat='dataset in datasets' class="panel panel-default">
+        <div class="panel-heading" id="heading-{{dataset.id}}"
+           role="button" ng-click='chartSeries("{{dataset.id}}")'
+           data-toggle="collapse" data-parent="#accordion" href="#collapse-{{dataset.id}}"
+           aria-expanded="true" aria-controls="collapse-{{dataset.id}}">
+          <h4 class="panel-title row">
+            <div class='col-sm-8'>
+              <span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" />
+              {{dataset.name}}
+            </div>
+            <div class='col-sm-4 text-right'>{{dataset.latest}}</div>
+          </h4>
+        </div>
+        <div id="collapse-{{dataset.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{dataset.id}}">
+          <div class="panel-body">{{dataset.description}}</div>
+        </div>
       </div>
-
-      <table class='table table-datasets table-striped'>
-        <tbody>
-          <!-- Two rows for each data set:
-            1. The icon, name and value of the set
-            2. The full description and chart for the set, initially hidden but
-              may be shown by clicking the first row. -->
-          <tr ng-repeat-start='dataset in datasets'
-            data-toggle='collapse' data-target='#{{dataset.id}}-description'
-            ng-click='chartSeries("{{dataset.id}}")' style='cursor: pointer'>
-            <td><span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" /></td>
-            <td>{{dataset.name}}</td>
-            <td style='text-align: right'><strong>{{dataset.latest}}</strong></td>
-          </tr>
-          <tr ng-repeat-end class='collapse' class='dataset-description' id='{{dataset.id}}-description'>
-            <td colspan='3'>
-              <p>{{dataset.description}}</p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>
