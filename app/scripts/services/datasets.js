@@ -146,7 +146,7 @@ angular.module('ecopulse')
       seriesColour: '#e4d354',
       source: 'IPGOD',
       dataset: '/data/innovation.json',
-      frequency: 'A',
+      frequency: 'Q',
       weight: 0.1,
       transform: 'static'
     }
