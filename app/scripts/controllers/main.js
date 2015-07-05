@@ -43,6 +43,11 @@ angular.module('ecopulse')
     }
 
     $scope.chartSeries = function(datasetId) {
+      // Don't try to chart the current chart
+      if (!_.isUndefined($scope.currentChartDataset) && datasetId == $scope.currentChartDataset.id) {
+        return;
+      }
+
       $scope.highchartsNG.loading = true;
 
       /* Clear chart */
@@ -71,6 +76,8 @@ angular.module('ecopulse')
       $scope.highchartsNG.title.text = dataset.name;
       $scope.highchartsNG.options.yAxis[1].title.text = dataset.units;
       $scope.highchartsNG.series.push(chartData);
+
+      $scope.currentChartDataset = dataset;
 
       $scope.highchartsNG.loading = false;
     }
