@@ -20,15 +20,14 @@ angular.module('ecopulse')
       $scope.highchartsNG.series = []
 
       // Hax
-      var dataset = $scope.datasets[0]
-
+      var dataset = $scope.datasets[6]
       // Make some random data representing the heartbeat for now
       var randomData = _.compact(_.map(dataset.data, function(pair) {
         // Ignore data before the year 2000
         if (pair[0] <= 946684800000) {
           return undefined;
         } else {
-          return [pair[0], pair[1] + Math.random()*50];
+          return [pair[0], (pair[1] * 10) + 20 + (Math.random()*6)];
         }
       }));
 
