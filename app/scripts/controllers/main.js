@@ -27,6 +27,7 @@ angular.module('ecopulse')
           // Import the data from the data source
           dataset.data = Transform.process(dataset.transform,result.data);
 
+          // Show the data label on the last point
           var lastIndex = dataset.data.length - 1;
           dataset.data[lastIndex] = {
             x: dataset.data[lastIndex][0],
@@ -37,9 +38,11 @@ angular.module('ecopulse')
           // Set the ID for later use
           dataset.id = id;
 
+          // Plot this on the second y axis
+          dataset.yAxis = 1;
+
           $scope.datasets.push(dataset);
 
-          $scope.highchartsNG.loading = false;
           $scope.queriesRunning = _.without($scope.queriesRunning, id);
           if($scope.queriesRunning.length <= 0)
             Combine.heartbeat($scope.datasets);
@@ -48,10 +51,11 @@ angular.module('ecopulse')
     }
 
     $scope.chartSeries = function(datasetId) {
+      $scope.highchartsNG.loading = true;
+
       /* Clear chart */
-      if ($scope.highchartsNG.series.length > 1) {
+      if ($scope.highchartsNG.series.length > 1)
         $scope.highchartsNG.series.pop();
-      }
 
       /* Find the dataset */
       $scope.currentGraphedDataset = _.find($scope.datasets, function(set) {
@@ -59,7 +63,10 @@ angular.module('ecopulse')
       });
 
       $scope.highchartsNG.title.text = $scope.currentGraphedDataset.name;
+      $scope.highchartsNG.options.yAxis[1].title.text = $scope.currentGraphedDataset.axisLabel;
       $scope.highchartsNG.series.push($scope.currentGraphedDataset);
+
+      $scope.highchartsNG.loading = false;
     }
 
     $scope.highchartsNG = {
@@ -82,11 +89,19 @@ angular.module('ecopulse')
             }
           }
         },
-        yAxis: {
-          title: {
-            text: 'Value'
+        yAxis: [
+          {
+            title: {
+              text: 'Hearbeat Index'
+            }
+          },
+          {
+            title: {
+              text: ''
+            },
+            opposite: true
           }
-        },
+        ],
         plotOptions: {
           line: {
             dataLabels: {
