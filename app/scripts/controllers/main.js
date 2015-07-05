@@ -22,10 +22,20 @@ angular.module('ecopulse')
       // Hax
       var dataset = $scope.datasets[0]
 
+      // Make some random data representing the heartbeat for now
+      var randomData = _.compact(_.map(dataset.data, function(pair) {
+        // Ignore data before the year 2000
+        if (pair[0] <= 946684800000) {
+          return undefined;
+        } else {
+          return [pair[0], pair[1] + Math.random()*50];
+        }
+      }));
+
       var chartData = {
         name: "Australia's Economic Heartbeat",
         yAxis: 0, // Plot this on the first y axis
-        data: _.clone(dataset.data)
+        data: randomData
       };
 
       // Show the data label on the last point
