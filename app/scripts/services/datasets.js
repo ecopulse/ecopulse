@@ -39,7 +39,6 @@ angular.module('ecopulse')
       frequency: 'Q',
       weight: 0.1,
       transform: 'ABS.Stat.Q',
-      scale: 'cpi',
       params: {
         'FREQUENCY': 'Q', // Quarterly data
         'TSEST': '20', // Seasonally Adjusted
@@ -62,7 +61,6 @@ angular.module('ecopulse')
       frequency: 'M',
       weight: 0.1,
       transform: 'ABS.Stat.M',
-      scale: 'UE',
       params: {
         'FREQUENCY': 'M', // Monthly data
         'TSEST': '20', // Seasonally Adjusted
@@ -85,7 +83,6 @@ angular.module('ecopulse')
       frequency: 'Q',
       weight: 0.1,
       transform: 'ABS.Stat.Q',
-      scale: 'growth',
       params: {
         'FREQUENCY': 'Q', // Quarterly data
         'TSEST': '20', // Seasonally Adjusted
@@ -108,8 +105,7 @@ angular.module('ecopulse')
       dataset: '/data/charity.json',
       frequency: 'A',
       weight: 0.1,
-      transform: 'static',
-      scale: 'growth'
+      transform: 'static'
     }
     items['income20'] = {
       name: 'Income for the less advantaged',
@@ -123,8 +119,7 @@ angular.module('ecopulse')
       dataset: '/data/income20.json',
       frequency: 'A',
       weight: 0.1,
-      transform: 'static',
-      scale: 'growth'
+      transform: 'static'
     }
     items['commodity'] = {
       name: 'Commodity prices',
@@ -138,8 +133,7 @@ angular.module('ecopulse')
       dataset: '/data/commodity.json',
       frequency: 'M',
       weight: 0.1,
-      transform: 'static',
-      scale: 'growth'
+      transform: 'static'
     }
 
     items['innovation'] = {
@@ -152,10 +146,9 @@ angular.module('ecopulse')
       seriesColour: '#e4d354',
       source: 'IPGOD',
       dataset: '/data/innovation.json',
-      frequency: 'A',
+      frequency: 'Q',
       weight: 0.1,
-      transform: 'static',
-      scale: 'growth'
+      transform: 'static'
     }
     items['GDP'] = {
       name: 'Annual GDP growth',
@@ -169,8 +162,7 @@ angular.module('ecopulse')
       dataset: '/data/gdp.json',
       frequency: 'Q',
       weight: 0.1,
-      transform: 'static',
-      scale: 'growth'
+      transform: 'static'
     }
     items['profit'] = {
       name: 'Growth in company profits',
@@ -184,7 +176,6 @@ angular.module('ecopulse')
       dataset: '/data/profits.json',
       frequency: 'Q',
       weight: 0.1,
-      transform: 'static',
-      scale: 'growth'
+      transform: 'static'
     }
   });
