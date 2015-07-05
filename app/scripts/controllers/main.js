@@ -63,7 +63,7 @@ angular.module('ecopulse')
       });
 
       $scope.highchartsNG.title.text = $scope.currentGraphedDataset.name;
-      $scope.highchartsNG.options.yAxis[1].title.text = $scope.currentGraphedDataset.axisLabel;
+      $scope.highchartsNG.options.yAxis[1].title.text = $scope.currentGraphedDataset.units;
       $scope.highchartsNG.series.push($scope.currentGraphedDataset);
 
       $scope.highchartsNG.loading = false;
