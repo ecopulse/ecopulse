@@ -19,22 +19,12 @@ angular.module('ecopulse')
       // Reset the chart series. This ensures the heartbeat is first!
       $scope.highchartsNG.series = []
 
-      // Hax
-      var dataset = $scope.datasets[6]
-      // Make some random data representing the heartbeat for now
-      var randomData = _.compact(_.map(dataset.data, function(pair) {
-        // Ignore data before the year 2000
-        if (pair[0] <= 946684800000) {
-          return undefined;
-        } else {
-          return [pair[0], (pair[1] * 10) + 20 + (Math.random()*6)];
-        }
-      }));
-
+      // Fetch a set of Heartbeat data
+      var dataset = Combine.heartbeat($scope.datasets);
       var chartData = {
         name: "Australia's Economic Heartbeat",
         yAxis: 0, // Plot this on the first y axis
-        data: randomData,
+        data: dataset.data,
         color: '#c79390'
       };
 
@@ -66,9 +56,8 @@ angular.module('ecopulse')
           $scope.datasets.push(dataset);
 
           $scope.queriesRunning = _.without($scope.queriesRunning, id);
-          if($scope.queriesRunning.length <= 0) {
-            Combine.heartbeat($scope.datasets);
-          }
+
+          if($scope.queriesRunning.length <= 0) chartHeartbeat();
         });
       });
     }
