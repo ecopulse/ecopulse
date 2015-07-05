@@ -126,7 +126,7 @@ angular.module('ecopulse')
       },
       series: [],
       title: {
-        text: "Our Economic Heartbeat"
+        text: "Australia's Economic Heartbeat"
       },
       loading: true
     }
