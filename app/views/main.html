@@ -20,7 +20,7 @@
             ng-click='chartSeries("{{dataset.id}}")' style='cursor: pointer'>
             <td><span class="glyphicon glyphicon-{{dataset.icon}}" aria-hidden="true" /></td>
             <td>{{dataset.name}}</td>
-            <td style='text-align: right'>{{dataset.latest}}</td>
+            <td style='text-align: right'><strong>{{dataset.latest}}</strong></td>
           </tr>
           <tr ng-repeat-end class='collapse' class='dataset-description' id='{{dataset.id}}-description'>
             <td colspan='3'>
