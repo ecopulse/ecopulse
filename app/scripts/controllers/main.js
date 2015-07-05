@@ -35,7 +35,8 @@ angular.module('ecopulse')
       var chartData = {
         name: "Australia's Economic Heartbeat",
         yAxis: 0, // Plot this on the first y axis
-        data: randomData
+        data: randomData,
+        color: '#c64841'
       };
 
       // Show the data label on the last point
@@ -102,7 +103,8 @@ angular.module('ecopulse')
       var chartData = {
         name: dataset.name,
         yAxis: 1, // Plot this on the second y axis
-        data: _.clone(dataset.data)
+        data: _.clone(dataset.data),
+        color: dataset.seriesColour
       };
 
       // Show the data label on the last point
